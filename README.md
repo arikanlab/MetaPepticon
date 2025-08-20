@@ -32,7 +32,7 @@ MetaPepticon requires`conda` and  `snakemake`:
   
 **2. Create a Snakemake environment in conda**:
 ```
-conda create -n snakemake bioconda::snakemake=8.25.5 conda-forge::mamba
+conda create -n snakemake -c conda-forge python=3.11 -c bioconda snakemake=8.25.5
 ```
   
 **3. Clone MetaPepticon repository**: If you do not have git installed, [install git](https://github.com/git-guides/install-git).
