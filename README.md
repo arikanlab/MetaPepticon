@@ -3,7 +3,7 @@
 
 If you use this tool, please cite:  
   
-Erozden AA, Tavsanli N, Demirel G, Sanli NO, Caliskan M, Arikan M. (2025) MetaPepticon: automated anticancer peptide prediction from genomics and metagenomics datasets, bioRxiv. 
+Erozden AA, Tavsanli N, Demirel G, Sanli NO, Caliskan M, Arikan M. (2025) MetaPepticon: automated anticancer peptide prediction from genomics and metagenomics datasets, bioRxiv. Link
 
 
 # Table of contents
@@ -13,19 +13,20 @@ Erozden AA, Tavsanli N, Demirel G, Sanli NO, Caliskan M, Arikan M. (2025) MetaPe
     - [Data](#data)
     - [Config](#config)
 - [Running](#running)
-    - [Running locally](#running-locally)
-    - [Running on a cluster](#running-on-a-cluster)
 - [Outputs](#outputs)
     - [Final outputs](#final-outputs)
     - [Intermediate outputs](#intermediate-outputs)
 
 # Overview
-MetaPepticon allows discovery of candidate ACPs directly from diverse sequencing inputs, including raw genomic, metagenomic, transcriptomic, and metatranscriptomic reads, as well as assembled contigs and peptide sequences. By employing a consensus-based strategy and supporting heterogeneous data types, it facilitates scalable, reproducible, and high-confidence identification of ACP candidates.
+MetaPepticon allows discovery of candidate anticancer peptides (ACPs) directly from diverse inputs, including:
+- Raw genomic, metagenomic, transcriptomic, and metatranscriptomic reads
+- Assembled contigs
+- Peptide sequences. 
 
-![Local Image](images/pipeline_overview.jpg)
+By employing a **consensus-based strategy** and supporting heterogeneous data types, it facilitates scalable, reproducible, and high-confidence identification of ACP candidates.
 
 # Requirements
-To use MetaPepticon, ensure you have `conda` and  `snakemake` installed: 
+MetaPepticon requires`conda` and  `snakemake`: 
    
 **1. Install conda**: If you do not have conda installed, [install conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).  
   
@@ -36,42 +37,43 @@ conda create -n snakemake bioconda::snakemake=8.25.5 conda-forge::mamba
   
 **3. Clone MetaPepticon repository**: If you do not have git installed, [install git](https://github.com/git-guides/install-git).
 ```
-git clone --recursive https://github.com/muzafferarikan/MetaPepticon.git
+git clone --recursive https://github.com/arikanlab/MetaPepticon.git
 ```
   
 **Note**: Once conda and snakemake are set up, MetaPepticon manages the installation of all other tools and dependencies automatically in their respective environments during the first run. 
 
 # Setup
 ## Data
-Copy your raw data to the relevant subfolders within the `data` directory:    
-* If you have metagenomics raw data, copy your files to `data/MG`  
-* If you have metatranscriptomics raw data, copy your files to `data/MT`  
-* If you have single organism genomics raw data, copy your files to `data/SG`
-* If you have single organism transcriptomics raw data, copy your files to `data/ST`
-* If you have contigs, copy your files to `data/contigs`
-* If you have peptides, copy your files to `data/peptides`   
+Copy your raw data to the relevant subfolders within the `data` directory:      
   
 **Important**: Please check sample format requirements below:  
-| Data | Library Layout | Sample Name Format  |
-|------|----------------|---------------------|
-| MG | PE | samplename_1.fastq.gz, samplename_2.fastq.gz |
-| MT | PE | samplename_1.fastq.gz, samplename_2.fastq.gz |
-| SG | PE | samplename_1.fastq.gz, samplename_2.fastq.gz |
-| ST | PE | samplename_1.fastq.gz, samplename_2.fastq.gz |
-| CO | - | samplename.fasta |
-| PE | - | samplename.fasta |
+| Data | Subfolder | Library Layout | Expected File Names |
+|------|-----------|----------------|---------------------|
+| Metagenomics | data/MG | PE | samplename_1.fastq.gz, samplename_2.fastq.gz |
+| Metatranscriptomics | data/MT | PE | samplename_1.fastq.gz, samplename_2.fastq.gz |
+| Genomics | data/SG | PE | samplename_1.fastq.gz, samplename_2.fastq.gz |
+| Transcriptomics | data/ST | PE |samplename_1.fastq.gz, samplename_2.fastq.gz |
+| Contigs | data/CO | - |samplename.fasta |
+| Peptides | data/PE | - | samplename.fasta |
 
 ## Config
-After copying your data, run the following script from your main MetaPepticon project folder to generate a config file:   
+MetaPepticon provides two options for generating the `config.yaml`
+
+**Option 1 (CLI)**   
 ```
 bash workflow/scripts/prepare_config.sh
 ```
-This script generates a `config.yaml` file within `config` folder based on contents of `data` directory. Review and modify analysis parameters in this file if you need.
+
+**Option 2 (GUI)**   
+```
+bash workflow/scripts/gui_prepare_config.py
+```
+Both options generate `config.yaml` file within `config` folder based on contents of `data` directory. Review and modify analysis parameters as needed.
 
 # Running
 Once setup is complete, follow these steps to run MetaPepticon: 
    
-**1. Activate your snakemake environment in conda**:
+**1. Activate snakemake environment**:
 ```
 conda activate snakemake
 ```
@@ -80,19 +82,18 @@ conda activate snakemake
 **2. Run MetaPepticon**:  
 Execute the following command from your project folder:
 ```
-snakemake -s workflow/Snakefile --resources toxinslot=1 --cores 2 --use-conda
+snakemake -s workflow/Snakefile --resources toxinslot=1 --cores 16 --use-conda
 ```
 
 
-**Note**: Adjust the `--cores` value to reflect the number of cores available.  
+**Note**: Adjust `--cores` to the number of cores available. `--cores` ensures proper resource allocation for toxicity prediction steps.
 
 
 # Outputs
-When MetaPepticon starts, it generates a `results` folder within your project directory, containing both `final` and `intermediate` outputs.
+MetaPepticon generates a `results` folder with two subfolders:
 
 ## Final outputs
-The `final` folder includes:  
-* Anticancer peptide and toxicity prediction results 
+`results/final`: Tab delimited tables (.txt), one per sample, including anticancer peptide and toxicity predictions
 
 ## Intermediate outputs
-`intermediate` folder contains outputs of each step executed by the pipeline. 
+`intermediate_files`: Outputs from each each step of the pipeline. 
