@@ -6,14 +6,15 @@
 .vscode/
 results/
 data/peptides/*
+data/contigs/*
 data/SG/*
 data/MG/*
 data/MT/*
 data/ST/*
 !data/SG/.gitkeep
-!data/ST/.gitkeep
 !data/MG/.gitkeep
 !data/MT/.gitkeep
+!data/ST/.gitkeep
 !data/peptides/.gitkeep
 !data/contigs/.gitkeep
 config/*
