@@ -6,7 +6,6 @@
 .vscode/
 results/
 data/peptides/*
-data/*
 data/SG/*
 data/MG/*
 data/MT/*
