@@ -1,0 +1,10 @@
+name: toxinpred.yaml
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.6
+  - scikit-learn
+  - pip
+  - pip:
+      - toxinpred3

@@ -1,0 +1,58 @@
+import pkg_resources
+
+required_version = "8.25.5"
+
+# Check if the installed Snakemake version is at least the required version
+try:
+    pkg_resources.require(f"snakemake=={required_version}")
+except pkg_resources.VersionConflict:
+    raise ImportError(f"Snakemake version {required_version} is required.")
+
+configfile: "config/config.yaml"
+
+input_type = config['input_type']
+
+if input_type == 'SG':
+    module sg_raw:
+        snakefile: "rules/sg_raw.smk"
+        config: config
+
+    use rule * from sg_raw as sg_raw_*
+
+elif input_type == 'ST':
+    module st_raw:
+        snakefile: "rules/st_raw.smk"
+        config: config
+
+    use rule * from st_raw as st_raw_*
+
+elif input_type == 'MG':
+    module mg_raw:
+        snakefile: "rules/mg_raw.smk"
+        config: config
+
+    use rule * from mg_raw as mg_raw_*
+
+elif input_type == 'MT':
+    module mt_raw:
+        snakefile: "rules/mt_raw.smk"
+        config: config
+
+    use rule * from mt_raw as mt_raw_*
+
+elif input_type == 'CO':
+    module contig:
+        snakefile: "rules/contig.smk"
+        config: config
+
+    use rule * from contig as contig_*
+
+elif input_type == 'PE':
+    module peptide:
+        snakefile: "rules/peptide.smk"
+        config: config
+
+    use rule * from peptide
+
+else:
+    print("Invalid value!\nPlease enter a valid input type).")

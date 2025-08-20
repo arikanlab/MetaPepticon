@@ -1,0 +1,14 @@
+name: conACP
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+  - pytorch
+dependencies:
+  - pytorch>=2.0.1
+  - python=3.9
+  - numpy>=1.25.2
+  - biopython
+  - pip
+  - pip:
+      - acppred

@@ -1,0 +1,5 @@
+name: R
+channels:
+  - conda-forge
+dependencies:
+  - r-dplyr

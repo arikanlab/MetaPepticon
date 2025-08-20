@@ -1,0 +1,11 @@
+name: smorf
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+      - smorfinder
+      - protobuf==3.20
