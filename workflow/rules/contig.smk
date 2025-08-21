@@ -34,7 +34,7 @@ rule smorfinder:
 	conda:
 		"../envs/smorfinder.yaml"
 	shell:
-		"smorf meta {input} --outdir {params.outdir} --threads 16"
+		"smorf meta {input} --outdir {params.outdir}"
 
 rule filter_peptides:
 	input:
