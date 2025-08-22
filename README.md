@@ -32,7 +32,7 @@ MetaPepticon requires`conda` and  `snakemake`:
   
 **2. Create a Snakemake environment in conda**:
 ```
-conda create -n snakemake -c conda-forge python=3.11 -c bioconda snakemake=8.25.5
+conda create -c conda-forge -c bioconda -n snakemake snakemake=8.25.5 python=3.11
 ```
   
 **3. Clone MetaPepticon repository**: If you do not have git installed, [install git](https://github.com/git-guides/install-git).
@@ -82,11 +82,11 @@ conda activate snakemake
 **2. Run MetaPepticon**:  
 Execute the following command from your project folder:
 ```
-snakemake -s workflow/Snakefile --resources toxinslot=1 --cores 16 --use-conda
+snakemake -s workflow/Snakefile --resources slot=1 --cores 16 --use-conda
 ```
 
 
-**Note**: Adjust `--cores` to the number of cores available. `--cores` ensures proper resource allocation for toxicity prediction steps.
+**Note**: Adjust `--cores` to the number of cores available. Do not change`--resources` as it ensures proper resource allocation for assembly and toxicity prediction steps.
 
 
 # Outputs

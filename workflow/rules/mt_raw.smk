@@ -87,6 +87,9 @@ rule rnaspades:
 		outdir = "results/intermediate_files/spades/{sample}/"
 	output:
 		output = "results/intermediate_files/spades/{sample}/contigs.fasta"
+	resources:
+		slot=1
+	threads: 32
 	conda:
 		"../envs/spades.yaml"
 	shell:
@@ -248,7 +251,7 @@ rule toxinpred:
 	output:
 		toxtemp_results=temp("results/intermediate_files/toxinpred/{sample}_toxtemp_results.txt")
 	resources:
-		toxinslot=1
+		slot=1
 	conda:
 		"../envs/toxinpred.yaml"
 	shell:

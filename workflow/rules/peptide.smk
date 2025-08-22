@@ -137,7 +137,7 @@ rule toxinpred:
 	output:
 		toxtemp_results="results/intermediate_files/toxinpred/{sample}/{sample}_toxtemp_results.txt"
 	resources:
-		toxinslot=1
+		slot=1
 	conda:
 		"../envs/toxinpred.yaml"
 	shell:
