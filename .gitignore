@@ -17,8 +17,8 @@ data/ST/*
 !data/ST/.gitkeep
 !data/peptides/.gitkeep
 !data/contigs/.gitkeep
+!resources/adapters.fa
 config/*
-resources/*
 resources/acpred/*
 resources/conACP/*
 log/

@@ -11,7 +11,7 @@
 
 # Function to format the files for peptides, contigs, SG, ST, MG and MT
 format_files() {
-    folder="$1"f
+    folder="$1"
     sample_name="$2"
 
     r1_file_exists=0
