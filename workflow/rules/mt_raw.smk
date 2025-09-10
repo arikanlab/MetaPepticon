@@ -22,6 +22,8 @@ rule fastqc_raw_pe:
 	output:
 		directory("results/intermediate_files/fastqc/raw")
 	threads: 16
+	conda:
+		"../envs/fastqc.yaml"
 	shell:
 		"""
 		mkdir -p {output}
@@ -35,6 +37,8 @@ rule multiqc_raw:
 		output = "results/intermediate_files/multiqc/raw/multiqc_report.html"
 	params:
 		output_dir =  "results/intermediate_files/multiqc/raw/"
+	conda:
+		"../envs/multiqc.yaml"
 	shell:
 		"multiqc {input} -o {params.output_dir}"
 
@@ -63,6 +67,8 @@ rule fastqc_trim_pe:
 		directory("results/intermediate_files/fastqc/trim")
 	params:
 		out="results/intermediate_files/fastqc/trim"
+	conda:
+		"../envs/fastqc.yaml"
 	shell:
 		"""
 		mkdir -p {output}
@@ -76,6 +82,8 @@ rule multiqc_trim:
 		output = "results/intermediate_files/multiqc/trim/multiqc_report.html"
 	params:
 		output_dir =  "results/intermediate_files/multiqc/trim/"
+	conda:
+		"../envs/multiqc.yaml"
 	shell:
 		"multiqc {input} -o {params.output_dir}"
 

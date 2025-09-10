@@ -65,6 +65,12 @@ bash workflow/scripts/prepare_config.sh
 ```
 
 **Option 2 (GUI)**   
+Install dependencies:
+```
+pip install PyYAML PyQt5
+
+```
+Generate config file:
 ```
 bash workflow/scripts/gui_prepare_config.py
 ```
