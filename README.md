@@ -53,8 +53,8 @@ Copy your raw data to the relevant subfolders within the `data` directory:
 | Metatranscriptomics | data/MT | PE | samplename_1.fastq.gz, samplename_2.fastq.gz |
 | Genomics | data/SG | PE | samplename_1.fastq.gz, samplename_2.fastq.gz |
 | Transcriptomics | data/ST | PE |samplename_1.fastq.gz, samplename_2.fastq.gz |
-| Contigs | data/CO | - |samplename.fasta |
-| Peptides | data/PE | - | samplename.fasta |
+| Contigs | data/contigs | - |samplename.fasta |
+| Peptides | data/peptides | - | samplename.fasta |
 
 ## Config
 MetaPepticon provides two options for generating the `config.yaml`
